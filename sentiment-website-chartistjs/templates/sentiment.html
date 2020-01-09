@@ -1,0 +1,219 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Section: Features v.2 -->
+<section class="my-5">
+    <!-- <div class="ct-chart" id="sentimentChart"> -->
+    <!-- </div> -->
+    <!-- Pie Chart================================================== -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-chart">
+                <div class="card-header card-header-white">
+                    <div class="" id="sentimentChart">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Sentiment
+                    </h3>
+                    <p class="card-category">
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Grid row -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-chart">
+                <div class="card-header card-header-white">
+                    <div class="" id="positiveChart">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Positive
+                    </h4>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header card-header-info">
+                    <h4 class="card-title ">
+                        Sample Posts
+                    </h4>
+                    <p class="card-category">
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-info">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Post
+                                </th>
+                            </thead>
+                            {% for i in range(positive_posts|length) %}
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {{ i+1 }}
+                                    </td>
+                                    <td>
+                                        {{ positive_posts[i] }}
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-chart">
+                <div class="card-header card-header-white">
+                    <div class="" id="negativeChart">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Negative
+                    </h4>
+                </div>
+            </div>
+                           <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">
+                            Sample Posts
+                        </h4>
+                        <p class="card-category">
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-danger">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Post
+                                    </th>
+                                </thead>
+                                {% for i in range(negative_posts|length) %}
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ i+1 }}
+                                        </td>
+                                        <td>
+                                            {{ negative_posts[i] }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+<!-- ========================================================== -->
+<script type="text/javascript">
+    // Sentiment Chart
+    var sentimentData = {
+        labels: [{% for item in sentiment_labels %}
+            "{{item}}",
+            {% endfor %}],
+        series: [{% for item in sentiment_values %}
+            {{item}},
+            {% endfor %}]
+    };
+
+    var sentimentOptions = {
+        height: 400,
+        labelInterpolationFnc: function(value) {
+            return value
+        }
+    };
+
+    var sentimentResponsiveOptions = [
+        ['screen and (min-width: 640px)', {
+            chartPadding: 30,
+            labelOffset: 100,
+            labelDirection: 'explode',
+            labelInterpolationFnc: function(value) {
+                return value;
+            }
+        }],
+        ['screen and (min-width: 1024px)', {
+            labelOffset: 80,
+            chartPadding: 20
+            }]
+    ];
+
+    new Chartist.Pie('#sentimentChart', sentimentData, sentimentOptions, sentimentResponsiveOptions);
+
+
+    // Positive Chart
+    var positiveData = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in positive_labels %}
+                    "{{item}}",
+                {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+            [{% for item in positive_values %}
+                {{item}},
+            {% endfor %}]
+            ]
+    };
+
+    var positiveOptions = {
+        height: 400
+    };
+
+    new Chartist.Bar('#positiveChart', positiveData, positiveOptions).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 30px'
+        });
+      }
+    });
+
+    // Negative Chart
+    var negativeData = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in negative_labels %}
+                    "{{item}}",
+                {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+            [{% for item in negative_values %}
+                {{item}},
+            {% endfor %}]
+            ]
+    };
+
+    var negativeOptions = {
+        height: 400
+    };
+
+    new Chartist.Bar('#negativeChart', negativeData, negativeOptions).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 30px'
+        });
+      }
+    });
+</script>
+{% endblock content %}

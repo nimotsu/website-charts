@@ -1,0 +1,180 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Section: Features v.2 -->
+<section class="my-5">
+    <!-- Section heading -->
+<!--     <h2 class="h1-responsive font-weight-bold text-center my-5">
+        Purpose
+    </h2> -->
+    <!-- Grid row -->
+    <!-- Chart=========================================================================== -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-chart">
+                <div class="card-header card-header-success">
+                    <div class="ct-chart" id="myChart">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Purpose
+                    </h3>
+                    <p class="card-category">
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- List==================================================================== -->
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-flask fa-2x">
+                            </i>
+                        </div>
+                        <p class="card-category">
+                            Treatment
+                        </p>
+                        <h3 class="card-title">
+                            Top 5 Treatment Options
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="">
+                            <ol>
+                                <li>
+                                    Dexcom
+                                </li>
+                                <li>
+                                    Metformin
+                                </li>
+                                <li>
+                                    Omnipod
+                                </li>
+                                <li>
+                                    Latnus
+                                </li>
+                                <li>
+                                    Imeglobin
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-smile-o fa-2x">
+                            </i>
+                        </div>
+                        <p class="card-category">
+                            Lifestyle
+                        </p>
+                        <h3 class="card-title">
+                            Top 5 Diabetic Friendly Recipe
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="">
+                            <ol>
+                                <li>
+                                    Potato Salad
+                                </li>
+                                <li>
+                                    Mashed Brocolli
+                                </li>
+                                <li>
+                                    Glucerna Shakes
+                                </li>
+                                <li>
+                                    English Muffins and Cream Cheese
+                                </li>
+                                <li>
+                                    Tarragon Chicken
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-stethoscope fa-2x">
+                            </i>
+                        </div>
+                        <p class="card-category">
+                            Symptoms
+                        </p>
+                        <h3 class="card-title">
+                            Top 5 Symptoms
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="">
+                            <ol>
+                                <li>
+                                    Jaundice
+                                </li>
+                                <li>
+                                    Lethargic
+                                </li>
+                                <li>
+                                    Drowsy
+                                </li>
+                                <li>
+                                    Nausea
+                                </li>
+                                <li>
+                                    Weight Gain
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =================================================================== -->
+    </div>
+</section>
+<script type="text/javascript">
+    var chart;
+    var data = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in labels %}
+               "{{item}}",
+              {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+            [{% for item in values %}
+                  {{item}},
+                {% endfor %}]
+        ]
+    };
+
+    // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+    // as you saw in the previous example
+    var options = {
+        height: 400
+    };
+
+    // Create a new line chart object where as first parameter we pass in a selector
+    // that is resolving to our chart container element. The Second parameter
+    // is the actual data object. As a third parameter we pass in our custom options.
+    chart = new Chartist.Bar('#myChart', data, options).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 30px'
+        });
+      }
+    });
+</script>
+{% endblock content %}

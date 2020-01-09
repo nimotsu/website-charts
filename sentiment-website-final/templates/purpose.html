@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-6 text-center">
+                <h2 class="section-title mb-3">
+                    Purpose
+                </h2>
+            </div>
+        </div>
+        <div class="bg-white py-4 mb-4">
+            <div class="row mx-4 my-4 product-item-2 align-items-start">
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <div class="" id="myChart">
+                    </div>
+                </div>
+                <div class="col-md-5 ml-auto product-title-wrap">
+                    <span class="number">
+                        01.
+                    </span>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h3 class="text-black mb-4 font-weight-bold">
+                        Overall purpose of posts extracted
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-section border-bottom" id="team-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+                <div class="person text-center">
+                    <img alt="Image" class="img-fluid rounded w-75 mb-3" src="{{ url_for('static', filename='images/joseph-gruenthal-AVtR-h28qmI-unsplash2.jpg') }}">
+                        <h3>
+                            Top 5 Treatment Options
+                        </h3>
+                        <p class="position text-muted">
+                            TREATMENT
+                        </p>
+                        <ol class="text-left">
+                            <li>
+                                Dexcom
+                            </li>
+                            <li>
+                                Metformin
+                            </li>
+                            <li>
+                                Omnipod
+                            </li>
+                            <li>
+                                Latnus
+                            </li>
+                            <li>
+                                Imeglobin
+                            </li>
+                        </ol>
+                    </img>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+                <div class="person text-center">
+                    <img alt="Image" class="img-fluid rounded w-75 mb-3" src="{{ url_for('static', filename='images/smoothies-3809508_19202.jpg') }}">
+                        <h3>
+                            Top 5 Diabetic Friendly Recipe
+                        </h3>
+                        <p class="position text-muted">
+                            LIFESTYLE
+                        </p>
+                        <ol class="text-left">
+                            <li>
+                                Potato Salad
+                            </li>
+                            <li>
+                                Mashed Brocolli
+                            </li>
+                            <li>
+                                Glucerna Shakes
+                            </li>
+                            <li>
+                                English Muffins and Cream Cheese
+                            </li>
+                            <li>
+                                Tarragon Chicken
+                            </li>
+                        </ol>
+                    </img>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="300">
+                <div class="person text-center">
+                    <img alt="Image" class="img-fluid rounded w-75 mb-3" src="{{ url_for('static', filename='images/sharon-mccutcheon-oKay0q7Pa30-unsplash2.jpg') }}">
+                        <h3>
+                            Top 5 Symptoms
+                        </h3>
+                        <p class="position text-muted">
+                            SYMPTOMS
+                        </p>
+                        <ol class="text-left">
+                            <li>
+                                Jaundice
+                            </li>
+                            <li>
+                                Lethargic
+                            </li>
+                            <li>
+                                Drowsy
+                            </li>
+                            <li>
+                                Nausea
+                            </li>
+                            <li>
+                                Weight Gain
+                            </li>
+                        </ol>
+                    </img>
+                </div>
+            </div>
+        </div>
+                <br/>
+        <br/>
+        <p>
+            <a class="float-right btn btn-black btn-black--hover rounded-0" href="/">
+                Back
+            </a>
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    var chart;
+    var data = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in labels %}
+               "{{item}}",
+              {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+            [{% for item in values %}
+                  {{item}},
+                {% endfor %}]
+        ]
+    };
+
+    // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+    // as you saw in the previous example
+    var options = {
+        height: 400,
+        plugins: [
+            Chartist.plugins.ctBarLabels()
+          ]
+    };
+
+    // Create a new line chart object where as first parameter we pass in a selector
+    // that is resolving to our chart container element. The Second parameter
+    // is the actual data object. As a third parameter we pass in our custom options.
+    chart = new Chartist.Bar('#myChart', data, options).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 30px; stroke: hsl(66, 67%, 46%)'
+        });
+      }
+    });
+</script>
+{% endblock content %}

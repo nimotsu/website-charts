@@ -1,0 +1,257 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-6 text-center">
+                <h2 class="section-title mb-3">
+                    Sentiment
+                </h2>
+            </div>
+        </div>
+        <div class="bg-white py-4 mb-4">
+            <div class="row mx-4 my-4 product-item-2 align-items-start">
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <div class="" id="sentimentChart">
+                    </div>
+                </div>
+                <div class="col-md-5 ml-auto product-title-wrap">
+                    <span class="number">
+                        01.
+                    </span>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h3 class="text-black mb-4 font-weight-bold">
+                        Overall sentiment of posts extracted
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <!-- -------------------------- -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="bg-white py-4 mb-4">
+                    <div class="row mx-4 my-4 product-item-2 align-items-start">
+                        <div class="col-md-6 mb-5 mb-md-0">
+                            <div class="" id="positiveChart">
+                            </div>
+                        </div>
+                        <div class="col-md-5 ml-auto product-title-wrap">
+                            <span class="number">
+                                02.
+                            </span>
+                            <h3 class="text-black mb-4 font-weight-bold">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                Positive emotion extracted from posts
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white py-4 mb-4">
+                    <div class="col-md-10">
+                        <h4 class="text-black font-weight-bold">
+                            Sample Posts
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-info">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Post
+                                    </th>
+                                </thead>
+                                {% for i in range(positive_posts|length) %}
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ i+1 }}
+                                        </td>
+                                        <td>
+                                            {{ positive_posts[i] }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white py-4 mb-4">
+                    <div class="row mx-4 my-4 product-item-2 align-items-start">
+                        <div class="col-md-7 mb-5 mb-md-0">
+                            <div class="" id="negativeChart">
+                            </div>
+                        </div>
+                        <div class="col-md-4 product-title-wrap">
+                            <span class="number">
+                                03.
+                            </span>
+                            <h3 class="text-black mb-4 font-weight-bold">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                Negative emotion extracted from posts
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white py-4 mb-4">
+                    <div class="col-md-10">
+                        <h4 class="text-black font-weight-bold">
+                            Sample Posts
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-danger">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Post
+                                    </th>
+                                </thead>
+                                {% for i in range(negative_posts|length) %}
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ i+1 }}
+                                        </td>
+                                        <td>
+                                            {{ negative_posts[i] }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- row -->
+        <br/>
+        <br/>
+        <p>
+            <a class="float-right btn btn-black btn-black--hover rounded-0" href="/">
+                Back
+            </a>
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    // Sentiment Chart ==============================================================
+    var sentimentData = {
+        labels: [{% for item in sentiment_labels %}
+            "{{item}}",
+            {% endfor %}],
+        series: [
+                    {% for i in range(sentiment_values|length) %}
+                    {
+                        value: {{  sentiment_values[i]  }},
+                        className: "{{  sentiment_class[i]  }}"
+
+                    },
+                    {% endfor %}
+            ]
+    };
+
+    var sentimentOptions = {
+        height: 400,
+        // showLabel: false
+        // labelInterpolationFnc: function(value) {
+        //     return value
+        // }
+    };
+
+    var sentimentResponsiveOptions = [
+        // ['screen and (min-width: 640px)', {
+        //     chartPadding: 30,
+        //     labelOffset: 100,
+        //     labelDirection: 'explode',
+        //     labelInterpolationFnc: function(value) {
+        //         return value;
+        //     }
+        // }],
+        // ['screen and (min-width: 1024px)', {
+        //     labelOffset: 80,
+        //     chartPadding: 20
+        //     }]
+    ];
+
+    new Chartist.Pie('#sentimentChart', sentimentData, sentimentOptions);
+
+
+    // Positive Chart ==============================================================
+    var positiveData = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in positive_labels %}
+                    "{{item}}",
+                {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+            [{% for item in positive_values %}
+                {{item}},
+                // className: "positive-dark"
+            {% endfor %}]
+            ]
+    };
+
+    var positiveOptions = {
+        height: 400,
+        plugins: [
+            Chartist.plugins.ctBarLabels()
+          ]
+    };
+
+    new Chartist.Bar('#positiveChart', positiveData, positiveOptions).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 30px; stroke: hsl(222, 69%, 63%)'
+        });
+      }
+    });
+
+    // Negative Chart ==============================================================
+    var negativeData = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in negative_labels %}
+                    "{{item}}",
+                {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+            [{% for item in negative_values %}
+                {{item}},
+            {% endfor %}]
+            ]
+    };
+
+    var negativeOptions = {
+        height: 400,
+        plugins: [
+            Chartist.plugins.ctBarLabels()
+          ]
+    };
+
+    new Chartist.Bar('#negativeChart', negativeData, negativeOptions).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 30px; stroke: hsl(4, 84%, 63%)'
+        });
+      }
+    });
+</script>
+{% endblock content %}

@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-6 text-center">
+                <h2 class="section-title mb-3">
+                    Emotion
+                </h2>
+            </div>
+        </div>
+        <div class="bg-white py-4 mb-4">
+            <div class="row mx-4 my-4 product-item-2 align-items-start">
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <div class="ct-chart" id="myChart">
+                    </div>
+                </div>
+                <div class="col-md-5 ml-auto product-title-wrap">
+                    <span class="number">
+                        01.
+                    </span>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h3 class="text-black mb-4 font-weight-bold">
+                        Overall emotion of posts extracted
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <!-- -------------------------- -->
+        <div class="bg-white py-4 mb-4">
+            <div class="col-md-10">
+                <h4 class="text-black font-weight-bold">
+                    Sample Posts
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Post
+                            </th>
+                            <th>
+                                Emotion
+                            </th>
+                        </thead>
+                        {% for i in range(posts|length) %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ i+1 }}
+                                </td>
+                                <td>
+                                    {{ posts[i] }}
+                                </td>
+                                <td>
+                                    {{ emotions[i] }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- row -->
+        <br/>
+        <br/>
+        <p>
+            <a class="float-right btn btn-black btn-black--hover rounded-0" href="/">
+                Back
+            </a>
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    var emo_data = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in labels %}
+                    "{{item}}",
+                {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+                [
+                    {% for i in range(values|length) %}
+                    {
+                        meta: '{{  color_code[i]  }}',
+                        value: {{  values[i]  }}
+                        
+                    },
+                    {% endfor %}
+                ]
+        ]
+    };
+
+    var options = {
+        height: 400,
+        plugins: [
+            Chartist.plugins.ctBarLabels()
+          ]
+    };
+
+    new Chartist.Bar('#myChart', emo_data, options);
+</script>
+{% endblock content %}

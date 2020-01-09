@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Section: Features v.2 -->
+<section class="my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-chart">
+                <div class="card-header card-header-white">
+                    <div class="" id="myChart">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Emotion
+                    </h3>
+                    <p class="card-category">
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">
+                            Sample Posts
+                        </h4>
+                        <p class="card-category">
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Post
+                                    </th>
+                                    <th>
+                                        Emotion
+                                    </th>
+                                </thead>
+                                {% for i in range(posts|length) %}
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ i+1 }}
+                                        </td>
+                                        <td>
+                                            {{ posts[i] }}
+                                        </td>
+                                        <td>
+                                            {{ emotions[i] }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    var data = {
+        // A labels array that can contain any sort of values
+        labels: [{% for item in labels %}
+                    "{{item}}",
+                {% endfor %}],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+            [{% for item in values %}
+                {{item}},
+            {% endfor %}]
+            ]
+    };
+
+    var options = {
+        height: 400
+    };
+
+    new Chartist.Bar('#myChart', data, options).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 30px'
+        });
+      }
+    });
+</script>
+{% endblock content %}

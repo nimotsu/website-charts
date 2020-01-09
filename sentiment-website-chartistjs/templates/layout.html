@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+            <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+                <!-- Bootstrap CSS -->
+                <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet"/>
+                <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+                </script>
+                <!-- font awesome -->
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+                <!-- chart js -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js">
+                </script>
+                <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet" type="text/css"/>
+                <title>
+                    DIABETES DIGITAL HUB
+                </title>
+                <!-- Material Dashboard Files -->
+                <link href="{{ url_for('static', filename='material-dashboard.css') }}" rel="stylesheet"/>
+                <!-- Chartist -->
+                <link href="//cdn.bootcss.com/chartist/0.10.1/chartist.min.css" rel="stylesheet"/>
+                <script src="//cdn.bootcss.com/chartist/0.10.1/chartist.min.js">
+                </script>
+                <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js">
+                </script>
+                <script src="{{ url_for('static', filename='chartist-plugin-pointlabels.js') }}"></script>
+                <link href="{{ url_for('static', filename='chartist-plugin-tooltip.css') }}" rel="stylesheet"/>
+                <script src="{{ url_for('static', filename='chartist-plugin-tooltip.js') }}"></script>
+
+            </meta>
+        </meta>
+    </head>
+</html>
+<!-- CSS Files -->
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand mr-4" href="/">
+                    Diabetes Digital Hub
+                </a>
+                <button aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarToggle" data-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon">
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav">
+                        <!-- <a class="nav-item nav-link" href="/">
+                                Home
+                            </a> -->
+                        <a class="nav-item nav-link" href="/sentiment">
+                            Sentiment
+                        </a>
+                        <a class="nav-item nav-link" href="/emotion">
+                            Emotion
+                        </a>
+                        <a class="nav-item nav-link" href="/purpose">
+                            Purpose
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container" role="main">
+        <div class="row">
+            <div class="col-md-12">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+</body>

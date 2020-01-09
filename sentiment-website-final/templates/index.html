@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="site-blocks-cover overlay" data-aos="fade" data-stellar-background-ratio="0.5" style="background-image: url({{ url_for('static', filename='images/kate-GBVRyE4PRLk-unsplash.jpg') }});">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12" data-aos="fade-up" data-aos-delay="400">
+                <div class="row mb-4">
+                    <div class="col-md-7">
+                        <h1>
+                            Dia-Pool
+                        </h1>
+                        <p class="mb-5 lead">
+                            Diabetes Digital Hub
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-5">
+                <div class="product-item">
+                    <figure>
+                        <img alt="Image" class="img-fluid" src="{{ url_for('static', filename='images/heart-3147976_1920.jpg') }}">
+                        </img>
+                    </figure>
+                    <div class="px-4 mb-3">
+                        <h2>
+                            <a href="/sentiment">
+                                Sentiment
+                            </a>
+                        </h2>
+                        <div>
+                            <a class="btn btn-black mr-1 rounded-0 mt-3" href="/sentiment">
+                                View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ----------------------->
+            <div class="col-lg-4 col-md-6 mb-5">
+                <div class="product-item">
+                    <figure>
+                        <img alt="Image" class="img-fluid" src="{{ url_for('static', filename='images/blur-chair-cheerful-160739.jpg') }}">
+                        </img>
+                    </figure>
+                    <div class="px-4">
+                        <h2>
+                            <a href="/emotion">
+                                Emotion
+                            </a>
+                        </h2>
+                        <div>
+                            <a class="btn btn-black mr-1 rounded-0 mt-3" href="/emotion">
+                                View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ------------------------->
+            <div class="col-lg-4 col-md-6 mb-5">
+                <div class="product-item">
+                    <figure>
+                        <img alt="Image" class="img-fluid" src="{{ url_for('static', filename='images/smart-IM0GHpsjJic-unsplash.jpg') }}">
+                        </img>
+                    </figure>
+                    <div class="px-4">
+                        <h2>
+                            <a href="/purpose">
+                                Purpose
+                            </a>
+                        </h2>
+                        <div>
+                            <a class="btn btn-black mr-1 rounded-0 mt-3" href="/purpose">
+                                View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

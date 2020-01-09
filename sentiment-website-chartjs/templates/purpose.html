@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Section: Features v.2 -->
+<section class="my-5">
+    <!-- Section heading -->
+    <h2 class="h1-responsive font-weight-bold text-center my-5">
+        Purpose
+    </h2>
+    <!-- bar chart canvas element -->
+    <center>
+        <canvas height="400" id="myChart" width="600" class="pb-5">
+        </canvas>
+    </center>
+    <!--     <p id="caption">
+        The chart is displaying a simple line chart.
+    </p> -->
+    <!-- Section description -->
+    <!--   <p class="lead grey-text text-center w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+    veniam.</p> -->
+    <!-- Grid row -->
+    <div class="row">
+        <div class="col-md-4 mb-md-0 mb-5">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-2">
+                    <i class="fa fa-flask fa-2x">
+                    </i>
+                </div>
+                <div class="col-lg-10 col-md-9 col-10">
+                    <h4 class="font-weight-bold">
+                        TREATMENT
+                    </h4>
+                    <p class="grey-text">
+                        Top 5 Treatment Options
+                    </p>
+                    <ol>
+                        <li>
+                            Dexcom
+                        </li>
+                        <li>
+                            Metformin
+                        </li>
+                        <li>
+                            Omnipod
+                        </li>
+                        <li>
+                            Latnus
+                        </li>
+                        <li>
+                            Imeglobin
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-md-0 mb-5">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-2">
+                    <i class="fa fa-smile-o fa-2x">
+                    </i>
+                </div>
+                <div class="col-lg-10 col-md-9 col-10">
+                    <h4 class="font-weight-bold">
+                        LIFESTYLE
+                    </h4>
+                    <p class="grey-text">
+                        Top 5 Diabetic Friendly Recipe
+                    </p>
+                    <ol>
+                        <li>
+                            Potato Salad
+                        </li>
+                        <li>
+                            Mashed Brocolli
+                        </li>
+                        <li>
+                            Glucerna Shakes
+                        </li>
+                        <li>
+                            English Muffins and Cream Cheese
+                        </li>
+                        <li>
+                            Tarragon Chicken
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-2">
+                    <i class="fa fa-stethoscope fa-2x">
+                    </i>
+                </div>
+                <div class="col-lg-10 col-md-9 col-10">
+                    <h4 class="font-weight-bold">
+                        SYMPTOMS
+                    </h4>
+                    <p class="grey-text">
+                        Top 5 Symptoms
+                    </p>
+                    <ol>
+                        <li>
+                            Jaundice
+                        </li>
+                        <li>
+                            Lethargic
+                        </li>
+                        <li>
+                            Drowsy
+                        </li>
+                        <li>
+                            Nausea
+                        </li>
+                        <li>
+                            Weight Gain
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    // Global parameters:
+      // do not resize the chart canvas when its container does (keep at 600x400px)
+      Chart.defaults.global.responsive = false;
+
+      // define the chart data
+      var chartData = {
+        labels : [{% for item in labels %}
+                   "{{item}}",
+                  {% endfor %}],
+        datasets : [{
+            label: '{{ legend }}',
+            fill: true,
+            lineTension: 0.1,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data : [{% for item in values %}
+                      {{item}},
+                    {% endfor %}],
+            spanGaps: false
+        }]
+      }
+
+      // get chart canvas
+      var ctx = document.getElementById("myChart").getContext("2d");
+
+      // create the chart using the chart canvas
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            legend: {
+                display: false
+            }
+        }
+      });
+</script>
+{% endblock content %}

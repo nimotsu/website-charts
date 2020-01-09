@@ -1,0 +1,126 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+body {
+  background-color: #0a1727;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.Container {
+  position: relative;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  width: 320px;
+  margin: 0 auto;
+}
+.Button {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  color: #fff;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.0625rem;
+  margin-top: 1.5625rem;
+  padding: 1.5625rem 2.1875rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  will-change: transform;
+  z-index: 1;
+}
+.Button-mask {
+  position: absolute;
+  transition: -webkit-transform 0.425s ease-in-out;
+  transition: transform 0.425s ease-in-out;
+  transition: transform 0.425s ease-in-out, -webkit-transform 0.425s ease-in-out;
+  z-index: -1;
+}
+.Button-mask.slides-left {
+  left: 0;
+}
+.Button-mask.slides-right {
+  right: 0;
+}
+.Button-slides {
+  top: 0;
+  width: 200%;
+  height: 100%;
+}
+.Button-rotates {
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 600%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.Button:hover .Button-mask.slides-left {
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
+}
+.Button:hover .Button-mask.slides-right {
+  -webkit-transform: translate3d(50%, 0, 0);
+          transform: translate3d(50%, 0, 0);
+}
+.Button:hover .Button-mask.rotates-clockwise {
+  -webkit-transform: rotate(180deg) translate3d(50%, 50%, 0);
+          transform: rotate(180deg) translate3d(50%, 50%, 0);
+}
+.Button:hover .Button-mask.rotates-c-clockwise {
+  -webkit-transform: rotate(-180deg) translate3d(50%, 50%, 0);
+          transform: rotate(-180deg) translate3d(50%, 50%, 0);
+}
+.Graident-one {
+  background: linear-gradient(135deg, #ecc344 0%, #e42d7f 100%);
+}
+.Graident-two {
+  background: linear-gradient(135deg, #00c7c5 0%, #0088d7 100%);
+}
+.Graident-three {
+  background: linear-gradient(135deg, #855edd 0%, #63afd3 100%);
+}
+.Graident-four {
+  background: linear-gradient(135deg, #e32d76 0%, #648fe6 100%);
+}
+.Graident-five {
+  background: linear-gradient(135deg, #b6eb77 0%, #359ab6 100%);
+}

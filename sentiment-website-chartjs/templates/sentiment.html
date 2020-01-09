@@ -1,0 +1,250 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Section: Features v.2 -->
+<section class="my-5">
+    <!-- Section heading -->
+    <h2 class="h1-responsive font-weight-bold text-center my-5">
+        Sentiment
+    </h2>
+    <!-- bar chart canvas element -->
+    <center>
+        <canvas class="pb-5" height="400" id="sentimentChart" width="600">
+        </canvas>
+    </center>
+    <!--     <p id="caption">
+        The chart is displaying a simple line chart.
+    </p> -->
+    <!-- Section description -->
+    <!--   <p class="lead grey-text text-center w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+    veniam.</p> -->
+    <!-- Grid row -->
+    <div class="row">
+        <div class="col-md-6 mb-md-0 mb-5">
+            <center>
+                <h4>
+                    Positive
+                </h4>
+                <canvas class="pb-3" height="400" id="positiveChart" width="400">
+                </canvas>
+                <p>
+                    Sample Posts
+                </p>
+            </center>
+            <ul class="list-group">
+                {% for post in positive_posts %}
+                <li class="list-group-item">
+                    {{ post }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-6">
+            <center>
+                <h4>
+                    Negative
+                </h4>
+                <canvas class="pb-3" height="400" id="negativeChart" width="400">
+                </canvas>
+                <p>
+                    Sample Posts
+                </p>
+            </center>
+            <ul class="list-group">
+                {% for post in negative_posts %}
+                <li class="list-group-item">
+                    {{ post }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+<script>
+    // Global parameters:
+    Chart.defaults.global.responsive = false;
+
+    // Sentiment Chart
+
+    // define the sentiment chart data
+    var sentimentData = {
+    labels : [{% for item in sentiment_labels %}
+               "{{item}}",
+              {% endfor %}],
+    datasets : [{
+        label: '{{ legend }}',
+        fill: true,
+        lineTension: 0.1,
+        backgroundColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ],
+        borderColor: '#fff',
+        // [
+        //     'rgba(54, 162, 235, 0.2)',
+        //     'rgba(255, 99, 132, 0.2)',
+        //     'rgba(255, 206, 86, 0.2)',
+        //     'rgba(75, 192, 192, 0.2)',
+        //     'rgba(153, 102, 255, 0.2)',
+        //     'rgba(255, 159, 64, 0.2)'
+        // ],
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in sentiment_values %}
+                  {{item}},
+                {% endfor %}],
+        spanGaps: false
+    }]
+    }
+
+    // get chart canvas
+    var ctx = document.getElementById("sentimentChart").getContext("2d");
+
+    // create the chart using the chart canvas
+    var sentimentChart = new Chart(ctx, {
+    type: 'pie',
+    data: sentimentData,
+    options: {
+        legend: {
+            display: true
+        }
+    }
+    });
+
+    // define the positive chart data ================================================
+    var positiveData = {
+    labels : [{% for item in positive_labels %}
+               "{{item}}",
+              {% endfor %}],
+    datasets : [{
+        label: '{{ legend }}',
+        fill: true,
+        lineTension: 0.1,
+        backgroundColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ],
+        borderColor: '#fff',
+        // [
+        //     'rgba(54, 162, 235, 0.2)',
+        //     'rgba(255, 99, 132, 0.2)',
+        //     'rgba(255, 206, 86, 0.2)',
+        //     'rgba(75, 192, 192, 0.2)',
+        //     'rgba(153, 102, 255, 0.2)',
+        //     'rgba(255, 159, 64, 0.2)'
+        // ],
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in positive_values %}
+                  {{item}},
+                {% endfor %}],
+        spanGaps: false
+    }]
+    }
+
+    // get chart canvas
+    var ctx = document.getElementById("positiveChart").getContext("2d");
+
+    // create the chart using the chart canvas
+    var positiveChart = new Chart(ctx, {
+    type: 'bar',
+    data: positiveData,
+    options: {
+        legend: {
+            display: false
+        }
+    }
+    });
+
+        // define the negative chart data =============================================
+    var negativeData = {
+    labels : [{% for item in negative_labels %}
+               "{{item}}",
+              {% endfor %}],
+    datasets : [{
+        label: '{{ legend }}',
+        fill: true,
+        lineTension: 0.1,
+        backgroundColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ],
+        borderColor: '#fff',
+        // [
+        //     'rgba(54, 162, 235, 0.2)',
+        //     'rgba(255, 99, 132, 0.2)',
+        //     'rgba(255, 206, 86, 0.2)',
+        //     'rgba(75, 192, 192, 0.2)',
+        //     'rgba(153, 102, 255, 0.2)',
+        //     'rgba(255, 159, 64, 0.2)'
+        // ],
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in negative_values %}
+                  {{item}},
+                {% endfor %}],
+        spanGaps: false
+    }]
+    }
+
+    // get chart canvas
+    var ctx = document.getElementById("negativeChart").getContext("2d");
+
+    // create the chart using the chart canvas
+    var negativeChart = new Chart(ctx, {
+    type: 'bar',
+    data: negativeData,
+    options: {
+        legend: {
+            display: false
+        }
+    }
+    });
+</script>
+{% endblock content %}
